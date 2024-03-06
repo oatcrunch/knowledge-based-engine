@@ -4,7 +4,7 @@ import { Construct } from "constructs";
 import * as cdk from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { join } from 'path';
-import { QUESTION_SEEDER_FN, QUESTION_SEEDER_MEMORY_GB, QUESTION_SEEDER_RETRIES_TIMEOUT } from "../modules/knowledge-based-engine-service/src/helpers/generic/constants";
+import { QUESTION_FN, QUESTION_MEMORY_GB, QUESTION_RETRIES_TIMEOUT, SEEDER_FN, SEEDER_MEMORY_GB, SEEDER_RETRIES_TIMEOUT } from "../modules/knowledge-based-engine-service/src/helpers/generic/constants";
 
 export interface IMicroserviceProps {
     questionTbl: ITable;
@@ -14,6 +14,7 @@ export interface IMicroserviceProps {
 
 export class KnowledgeMicroservicesConstruct extends Construct {
     public readonly handleSeederFn: NodejsFunction;
+    public readonly handleQuestionFn: NodejsFunction;
 
     constructor(scope: Construct, id: string, props: IMicroserviceProps) {
         super(scope, id);
@@ -22,13 +23,14 @@ export class KnowledgeMicroservicesConstruct extends Construct {
             props.templateTbl,
             props.ruleTbl
         );
+        this.handleQuestionFn = this.createQuestionFn(props.questionTbl);
     }
 
     private createSeederFn(questionTbl: ITable, templateTbl: ITable, ruleTbl: ITable): NodejsFunction {
-        const fn = new NodejsFunction(this, QUESTION_SEEDER_FN!, {
-            functionName: QUESTION_SEEDER_FN,
-            memorySize: QUESTION_SEEDER_MEMORY_GB,
-            timeout: cdk.Duration.seconds(QUESTION_SEEDER_RETRIES_TIMEOUT),
+        const fn = new NodejsFunction(this, SEEDER_FN!, {
+            functionName: SEEDER_FN,
+            memorySize: SEEDER_MEMORY_GB,
+            timeout: cdk.Duration.seconds(SEEDER_RETRIES_TIMEOUT),
             runtime: lambda.Runtime.NODEJS_16_X,
             handler: 'main',
             entry: join(
@@ -48,6 +50,26 @@ export class KnowledgeMicroservicesConstruct extends Construct {
         questionTbl.grantWriteData(fn);
         templateTbl.grantWriteData(fn);
         ruleTbl.grantWriteData(fn);
+        return fn;
+    }
+
+    private createQuestionFn(questionTbl: ITable) {
+        const fn = new NodejsFunction(this, QUESTION_FN!, {
+            functionName: QUESTION_FN,
+            memorySize: QUESTION_MEMORY_GB,
+            timeout: cdk.Duration.seconds(QUESTION_RETRIES_TIMEOUT),
+            runtime: lambda.Runtime.NODEJS_16_X,
+            handler: 'main',
+            entry: join(
+                __dirname,
+                '/../modules/knowledge-based-engine-service/src/handlers/handle-question.ts'
+            ),
+            bundling: {
+                minify: true,
+                externalModules: ['aws-sdk'],
+            },
+        });
+        questionTbl.grantReadData(fn);
         return fn;
     }
 }

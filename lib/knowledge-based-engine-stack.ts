@@ -18,7 +18,8 @@ export class KnowledgeBasedEngineStack extends cdk.Stack {
     });
 
     const apiGateway = new KnowledgeApiGatewayConstruct(this, 'ApiGateway', {
-      questionMicroservice: microservices.handleSeederFn
+      seederMicroservice: microservices.handleSeederFn,
+      questionMicroservice: microservices.handleQuestionFn
     });
 
     // example resource
