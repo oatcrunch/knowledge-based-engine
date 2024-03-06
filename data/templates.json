@@ -1,0 +1,108 @@
+[
+    {
+      "Id": 1,
+      "Title": "Yamaha Yz450f",
+      "Description": "Dirt bike for versatility on different terrains",
+      "HashedResponse": "34fd7d25260ef4ccc2e14db97b86c823",
+      "JsonResponse": {
+        "1000": "1",
+        "2000": "1"
+      },
+      "RefId": ""
+    },
+    {
+      "Id": 2,
+      "Title": "Yamaha R1",
+      "Description": "Superbike for sportier ride",
+      "HashedResponse": "f8916693b232e2198828b13cc13ea0f4",
+      "JsonResponse": {
+        "1000": "1",
+        "2000": "2",
+        "3000": "1"
+      },
+      "RefId": ""
+    },
+    {
+      "Id": 3,
+      "Title": "Suzuki SV650",
+      "Description": "Daily usage motorbike",
+      "HashedResponse": "db06e2f22435a649123d5d9a2b259619",
+      "JsonResponse": {
+        "1000": "1",
+        "2000": "2",
+        "3000": "2"
+      },
+      "RefId": ""
+    },
+    {
+      "Id": 4,
+      "Title": "BMW M3",
+      "Description": "Turbocharged 3L engine for high performance",
+      "HashedResponse": "a4cfca9d72a336abf1261b97e3dc5e53",
+      "JsonResponse": {
+        "1000": "2",
+        "3000": "1",
+        "4000": "1"
+      },
+      "RefId": ""
+    },
+    {
+      "Id": 5,
+      "Title": "Subaru BRZ",
+      "Description": "2.4L naturally aspirated engine for sportier drive",
+      "HashedResponse": "ce5fb182e3f0d940269b17c5fb0432e0",
+      "JsonResponse": {
+        "1000": "2",
+        "3000": "1",
+        "4000": "2"
+      },
+      "RefId": ""
+    },
+    {
+      "Id": 6,
+      "Title": "Honda HRV",
+      "Description": "Comfortable SUV with plenty of room in the interior",
+      "HashedResponse": "c15501c0540235712754ebabea00e12c",
+      "JsonResponse": {
+        "1000": "2",
+        "3000": "2",
+        "5000": "1"
+      },
+      "RefId": ""
+    },
+    {
+      "Id": 7,
+      "Title": "Honda Civic FK10",
+      "Description": "Sporty car for a daily drive",
+      "HashedResponse": "2d195e2671fd48e1a72f61e24134f63f",
+      "JsonResponse": {
+        "1000": "2",
+        "3000": "2",
+        "5000": "2"
+      },
+      "RefId": ""
+    },
+    {
+      "Id": 8,
+      "Title": "Isuzu D-max",
+      "Description": "Ordinary truck for daily usage",
+      "HashedResponse": "566b33d996d309e5b4203890733ebe47",
+      "JsonResponse": {
+        "1000": "3",
+        "4000": "1"
+      },
+      "RefId": ""
+    },
+    {
+      "Id": 9,
+      "Title": "JAC",
+      "Description": "Heavy duty truck for industrial usage",
+      "HashedResponse": "f6f0961d6ad847903553823af303775d",
+      "JsonResponse": {
+        "1000": "3",
+        "4000": "2"
+      },
+      "RefId": ""
+    }
+  ]
+  

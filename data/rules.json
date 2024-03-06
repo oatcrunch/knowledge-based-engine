@@ -1,0 +1,56 @@
+[
+  {
+    "SourceQuestionRefId": null,
+    "CurrentQuestionRefId": 1000,
+    "Rule": {
+      "isMultipleAnswer": false,
+      "eq": 1
+    },
+    "NextQuestionRefId": 2000
+  },
+  {
+    "SourceQuestionRefId": null,
+    "CurrentQuestionRefId": 1000,
+    "Rule": {
+      "isMultipleAnswer": false,
+      "eq": 2
+    },
+    "NextQuestionRefId": 3000
+  },
+  {
+    "SourceQuestionRefId": null,
+    "CurrentQuestionRefId": 1000,
+    "Rule": {
+      "isMultipleAnswer": false,
+      "eq": 3
+    },
+    "NextQuestionRefId": 4000
+  },
+  {
+    "SourceQuestionRefId": 1000,
+    "CurrentQuestionRefId": 2000,
+    "Rule": {
+      "isMultipleAnswer": false,
+      "eq": 2
+    },
+    "NextQuestionRefId": 3000
+  },
+  {
+    "SourceQuestionRefId": 1000,
+    "CurrentQuestionRefId": 3000,
+    "Rule": {
+      "isMultipleAnswer": false,
+      "eq": 1
+    },
+    "NextQuestionRefId": 4000
+  },
+  {
+    "SourceQuestionRefId": 1000,
+    "CurrentQuestionRefId": 3000,
+    "Rule": {
+      "isMultipleAnswer": false,
+      "eq": 2
+    },
+    "NextQuestionRefId": 5000
+  }
+]
