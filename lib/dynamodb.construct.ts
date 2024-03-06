@@ -10,7 +10,7 @@ import {
   QUESTION_TABLE_NAME,
   RULE_TABLE_NAME,
   TEMPLATE_TABLE_NAME,
-} from "../modules/rule-based-engine-service/src/helpers/generic/constants";
+} from "../modules/knowledge-based-engine-service/src/helpers/generic/constants";
 
 export class KnowledgeDbConstruct extends Construct {
   public readonly questionTable: ITable;
@@ -30,7 +30,7 @@ export class KnowledgeDbConstruct extends Construct {
   private createQuestionTable(): ITable {
     return new Table(this, QUESTION_TABLE_NAME!, {
       partitionKey: {
-        name: "id",
+        name: "Id",
         type: AttributeType.NUMBER,
       },
       sortKey: {
@@ -46,7 +46,7 @@ export class KnowledgeDbConstruct extends Construct {
   private createTemplateTable(): ITable {
     return new Table(this, TEMPLATE_TABLE_NAME!, {
         partitionKey: {
-          name: "id",
+          name: "Id",
           type: AttributeType.NUMBER,
         },
         sortKey: {
@@ -62,7 +62,7 @@ export class KnowledgeDbConstruct extends Construct {
   private createRuleTable(): ITable {
     const table = new Table(this, RULE_TABLE_NAME!, {
       partitionKey: {
-        name: "id",
+        name: "Id",
         type: AttributeType.NUMBER,
       },
       sortKey: {
