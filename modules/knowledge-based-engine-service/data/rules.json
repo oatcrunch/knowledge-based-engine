@@ -1,8 +1,8 @@
 [
   {
     "Id": 1,
-    "SourceQuestionRefId": 0,
-    "CurrentQuestionRefId": 1000,
+    "SourceQuestionRefId": "0",
+    "CurrentQuestionRefId": "1000",
     "Rule": {
       "isMultipleAnswer": false,
       "eq": 1
@@ -11,8 +11,8 @@
   },
   {
     "Id": 2,
-    "SourceQuestionRefId": 0,
-    "CurrentQuestionRefId": 1000,
+    "SourceQuestionRefId": "0",
+    "CurrentQuestionRefId": "1000",
     "Rule": {
       "isMultipleAnswer": false,
       "eq": 2
@@ -21,8 +21,8 @@
   },
   {
     "Id": 3,
-    "SourceQuestionRefId": 0,
-    "CurrentQuestionRefId": 1000,
+    "SourceQuestionRefId": "0",
+    "CurrentQuestionRefId": "1000",
     "Rule": {
       "isMultipleAnswer": false,
       "eq": 3
@@ -31,8 +31,8 @@
   },
   {
     "Id": 4,
-    "SourceQuestionRefId": 1000,
-    "CurrentQuestionRefId": 2000,
+    "SourceQuestionRefId": "1000",
+    "CurrentQuestionRefId": "2000",
     "Rule": {
       "isMultipleAnswer": false,
       "eq": 2
@@ -41,8 +41,8 @@
   },
   {
     "Id": 5,
-    "SourceQuestionRefId": 1000,
-    "CurrentQuestionRefId": 3000,
+    "SourceQuestionRefId": "1000",
+    "CurrentQuestionRefId": "3000",
     "Rule": {
       "isMultipleAnswer": false,
       "eq": 1
@@ -51,8 +51,8 @@
   },
   {
     "Id": 6,
-    "SourceQuestionRefId": 1000,
-    "CurrentQuestionRefId": 3000,
+    "SourceQuestionRefId": "1000",
+    "CurrentQuestionRefId": "3000",
     "Rule": {
       "isMultipleAnswer": false,
       "eq": 2

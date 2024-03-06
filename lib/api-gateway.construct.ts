@@ -22,8 +22,8 @@ export class KnowledgeApiGatewayConstruct extends Construct {
             proxy: false
         });
 
-        const question = apiGateway.root.addResource('seeder');
-        question.addMethod('POST');
+        const seeder = apiGateway.root.addResource('seeder');
+        seeder.addMethod('POST');
     }
 
     private createQuestionApi(questionMicroservice: IFunction) {

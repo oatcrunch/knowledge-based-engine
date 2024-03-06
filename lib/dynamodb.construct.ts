@@ -29,13 +29,17 @@ export class KnowledgeDbConstruct extends Construct {
 
   private createQuestionTable(): ITable {
     return new Table(this, QUESTION_TABLE_NAME!, {
+      // partitionKey: {
+      //   name: "Id",
+      //   type: AttributeType.NUMBER,
+      // },
+      // sortKey: {
+      //   name: "QuestionRefId",
+      //   type: AttributeType.NUMBER,
+      // },
       partitionKey: {
-        name: "Id",
-        type: AttributeType.NUMBER,
-      },
-      sortKey: {
         name: "QuestionRefId",
-        type: AttributeType.NUMBER,
+        type: AttributeType.STRING,
       },
       tableName: QUESTION_TABLE_NAME,
       removalPolicy: RemovalPolicy.DESTROY,
@@ -45,40 +49,52 @@ export class KnowledgeDbConstruct extends Construct {
 
   private createTemplateTable(): ITable {
     return new Table(this, TEMPLATE_TABLE_NAME!, {
-        partitionKey: {
-          name: "Id",
-          type: AttributeType.NUMBER,
-        },
-        sortKey: {
-          name: "HashedResponse",
-          type: AttributeType.STRING,
-        },
-        tableName: TEMPLATE_TABLE_NAME,
-        removalPolicy: RemovalPolicy.DESTROY,
-        billingMode: BillingMode.PAY_PER_REQUEST,
-      });
+      // partitionKey: {
+      //   name: "Id",
+      //   type: AttributeType.NUMBER,
+      // },
+      // sortKey: {
+      //   name: "HashedResponse",
+      //   type: AttributeType.STRING,
+      // },
+      partitionKey: {
+        name: "HashedResponse",
+        type: AttributeType.STRING,
+      },
+      tableName: TEMPLATE_TABLE_NAME,
+      removalPolicy: RemovalPolicy.DESTROY,
+      billingMode: BillingMode.PAY_PER_REQUEST,
+    });
   }
 
   private createRuleTable(): ITable {
     const table = new Table(this, RULE_TABLE_NAME!, {
+      // partitionKey: {
+      //   name: "Id",
+      //   type: AttributeType.NUMBER,
+      // },
+      // sortKey: {
+      //   name: "CurrentQuestionRefId",
+      //   type: AttributeType.NUMBER,
+      // },
       partitionKey: {
-        name: "Id",
-        type: AttributeType.NUMBER,
+        name: "SourceQuestionRefId",
+        type: AttributeType.STRING,
       },
       sortKey: {
         name: "CurrentQuestionRefId",
-        type: AttributeType.NUMBER,
+        type: AttributeType.STRING,
       },
       tableName: RULE_TABLE_NAME,
       removalPolicy: RemovalPolicy.DESTROY,
       billingMode: BillingMode.PAY_PER_REQUEST,
     });
 
-    table.addGlobalSecondaryIndex({
-      indexName: "SourceQuestionRefIdIndex",
-      partitionKey: { name: "SourceQuestionRefId", type: AttributeType.NUMBER },
-      sortKey: { name: "Id", type: AttributeType.NUMBER },
-    });
+    // table.addGlobalSecondaryIndex({
+    //   indexName: "SourceQuestionRefIdIndex",
+    //   partitionKey: { name: "SourceQuestionRefId", type: AttributeType.NUMBER },
+    //   sortKey: { name: "Id", type: AttributeType.NUMBER },
+    // });
 
     return table;
   }

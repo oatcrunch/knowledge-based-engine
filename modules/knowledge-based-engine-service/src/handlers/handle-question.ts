@@ -1,5 +1,5 @@
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from "aws-lambda";
-import { QuestionDAL } from "../data-access/question";
+import { QuestionDAL } from "../data-access/question.dal";
 
 const questionDal = new QuestionDAL();
 
@@ -22,11 +22,11 @@ export const main = async (
       console.log(`Ids: ${previousQuestionId}, ${currentQuestionId}`);
 
       if (previousQuestionId < 1 || currentQuestionId < 1) {
-        const nextQuestion = questionDal.find(1000);
+        const question = await questionDal.find(1000);
         return {
           statusCode: 200,
           body: JSON.stringify({
-            nextQuestion,
+            question,
           }),
         };
       }
