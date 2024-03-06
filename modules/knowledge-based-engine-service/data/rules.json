@@ -1,7 +1,7 @@
 [
   {
     "Id": 1,
-    "SourceQuestionRefId": null,
+    "SourceQuestionRefId": 0,
     "CurrentQuestionRefId": 1000,
     "Rule": {
       "isMultipleAnswer": false,
@@ -11,7 +11,7 @@
   },
   {
     "Id": 2,
-    "SourceQuestionRefId": null,
+    "SourceQuestionRefId": 0,
     "CurrentQuestionRefId": 1000,
     "Rule": {
       "isMultipleAnswer": false,
@@ -21,7 +21,7 @@
   },
   {
     "Id": 3,
-    "SourceQuestionRefId": null,
+    "SourceQuestionRefId": 0,
     "CurrentQuestionRefId": 1000,
     "Rule": {
       "isMultipleAnswer": false,

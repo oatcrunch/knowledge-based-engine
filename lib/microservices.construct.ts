@@ -8,19 +8,23 @@ import { QUESTION_SEEDER_FN, QUESTION_SEEDER_MEMORY_GB, QUESTION_SEEDER_RETRIES_
 
 export interface IMicroserviceProps {
     questionTbl: ITable;
+    templateTbl: ITable;
+    ruleTbl: ITable;
 }
 
 export class KnowledgeMicroservicesConstruct extends Construct {
-    public readonly handleQuestionSeedingFn: NodejsFunction;
+    public readonly handleSeederFn: NodejsFunction;
 
     constructor(scope: Construct, id: string, props: IMicroserviceProps) {
         super(scope, id);
-        this.handleQuestionSeedingFn = this.createQuestionsSeedFn(
-            props.questionTbl
+        this.handleSeederFn = this.createSeederFn(
+            props.questionTbl,
+            props.templateTbl,
+            props.ruleTbl
         );
     }
 
-    private createQuestionsSeedFn(dbTable: ITable): NodejsFunction {
+    private createSeederFn(questionTbl: ITable, templateTbl: ITable, ruleTbl: ITable): NodejsFunction {
         const fn = new NodejsFunction(this, QUESTION_SEEDER_FN!, {
             functionName: QUESTION_SEEDER_FN,
             memorySize: QUESTION_SEEDER_MEMORY_GB,
@@ -29,19 +33,21 @@ export class KnowledgeMicroservicesConstruct extends Construct {
             handler: 'main',
             entry: join(
                 __dirname,
-                '/../modules/knowledge-based-engine-service/src/handlers/handle-question-seeder.ts'
+                '/../modules/knowledge-based-engine-service/src/handlers/handle-seeder.ts'
             ),
             bundling: {
                 minify: true,
                 externalModules: ['aws-sdk'],
             },
-            environment: {
-                PRIMARY_KEY: 'id',
-                SORT_KEY: 'QuestionRefId',
-                MAIL_TRAIL_TABLE_NAME: dbTable.tableName,
-            },
+            // environment: {
+            //     PRIMARY_KEY: 'id',
+            //     SORT_KEY: 'QuestionRefId',
+            //     MAIL_TRAIL_TABLE_NAME: dbTable.tableName,
+            // },
         });
-        dbTable.grantWriteData(fn); // to allow lambda function to write data to database
+        questionTbl.grantWriteData(fn);
+        templateTbl.grantWriteData(fn);
+        ruleTbl.grantWriteData(fn);
         return fn;
     }
 }

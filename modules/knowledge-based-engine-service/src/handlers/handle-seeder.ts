@@ -3,7 +3,7 @@ import {
     Context,
     APIGatewayProxyResult,
 } from 'aws-lambda';
-import { uploadQuestionsData } from '../helpers/upload/upload-util';
+import { uploadQuestionsData, uploadRuleData, uploadTemplateData } from '../helpers/upload/upload-util';
 
 export const main = async (
     event: APIGatewayEvent,
@@ -11,7 +11,15 @@ export const main = async (
 ): Promise<APIGatewayProxyResult> => {
     console.log('event 👉', event);
     try {
+        console.log('Uploading question data');
         await uploadQuestionsData();
+
+        console.log('Uploading template data');
+        await uploadTemplateData();
+
+        console.log('Uploading rule data');
+        await uploadRuleData();
+        
         return {
             statusCode: 200,
             body: JSON.stringify({
