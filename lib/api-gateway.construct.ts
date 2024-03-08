@@ -2,13 +2,13 @@ import { LambdaRestApi } from 'aws-cdk-lib/aws-apigateway';
 import { IFunction } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 
-interface KnowledgeApiGatewayProps {
+interface IKnowledgeApiGatewayProps {
     seederMicroservice: IFunction;
     questionMicroservice: IFunction;
 }
 
 export class KnowledgeApiGatewayConstruct extends Construct {
-    constructor(scope: Construct, id: string, props: KnowledgeApiGatewayProps) {
+    constructor(scope: Construct, id: string, props: IKnowledgeApiGatewayProps) {
         super(scope, id);
 
         this.createSeederApi(props.seederMicroservice);

@@ -11,3 +11,7 @@ export const SEEDER_MEMORY_GB = 128;
 export const QUESTION_FN = 'QuestionFn';
 export const QUESTION_RETRIES_TIMEOUT = 360;
 export const QUESTION_MEMORY_GB = 128;
+
+// ElastiCache related
+export const ELASTICACHE_STACK_NAME = "ElastiCacheStack";
+export const CLUSTER_NAME = 'KnowledgeSession';

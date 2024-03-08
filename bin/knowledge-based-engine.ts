@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { KnowledgeBasedEngineStack } from '../lib/knowledge-based-engine-stack';
+import { KnowledgeBasedEngineStack } from '../lib/knowledge-based-engine.stack';
 
 const app = new cdk.App();
 new KnowledgeBasedEngineStack(app, 'KnowledgeBasedEngineStack', {

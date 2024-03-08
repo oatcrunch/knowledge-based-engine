@@ -1,5 +1,7 @@
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from "aws-lambda";
+import { v4 as uuidv4 } from 'uuid';
 import { QuestionDAL } from "../data-access/question.dal";
+import { cacheClient } from "../data-access/cache-client";
 
 const questionDal = new QuestionDAL();
 
@@ -12,21 +14,29 @@ export const main = async (
     if (event.httpMethod === "PUT") {
       let previousQuestionId = 0;
       let currentQuestionId = 0;
+      let currentSessionId: string = null;
       const qsParams = event.queryStringParameters;
 
       if (qsParams != null) {
         previousQuestionId = Number.parseInt(qsParams.prevQsId as string);
         currentQuestionId = Number.parseInt(qsParams.currQsId as string);
+        currentSessionId = qsParams.sessionId;
       }
 
-      console.log(`Ids: ${previousQuestionId}, ${currentQuestionId}`);
+      console.log(`Ids: ${previousQuestionId}, ${currentQuestionId}, ${currentSessionId}`);
 
-      if (previousQuestionId < 1 || currentQuestionId < 1) {
+      if (!currentSessionId || previousQuestionId < 1 || currentQuestionId < 1) {
+        const newSessionId: string = uuidv4();
+        await cacheClient.connect();
+        const cachingRes = await cacheClient.set(newSessionId,'{}');
+        console.log('cachingRes', cachingRes);
+
         const question = await questionDal.find(1000);
         return {
           statusCode: 200,
           body: JSON.stringify({
             question,
+            sessionId: newSessionId
           }),
         };
       }
@@ -43,6 +53,9 @@ export const main = async (
       }
 
       // TODO
+      await cacheClient.connect();
+      const prevSesionData = await cacheClient.get(currentSessionId);
+      console.log('prevSessionData', prevSesionData);
 
       return {
         statusCode: 200,
@@ -66,3 +79,4 @@ export const main = async (
     };
   }
 };
+

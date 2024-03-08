@@ -31,7 +31,7 @@ export class KnowledgeMicroservicesConstruct extends Construct {
             functionName: SEEDER_FN,
             memorySize: SEEDER_MEMORY_GB,
             timeout: cdk.Duration.seconds(SEEDER_RETRIES_TIMEOUT),
-            runtime: lambda.Runtime.NODEJS_16_X,
+            runtime: lambda.Runtime.NODEJS_20_X,
             handler: 'main',
             entry: join(
                 __dirname,
@@ -58,7 +58,7 @@ export class KnowledgeMicroservicesConstruct extends Construct {
             functionName: QUESTION_FN,
             memorySize: QUESTION_MEMORY_GB,
             timeout: cdk.Duration.seconds(QUESTION_RETRIES_TIMEOUT),
-            runtime: lambda.Runtime.NODEJS_16_X,
+            runtime: lambda.Runtime.NODEJS_20_X,
             handler: 'main',
             entry: join(
                 __dirname,
