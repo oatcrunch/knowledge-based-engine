@@ -7,45 +7,18 @@ import { GetItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
 export class QuestionDAL {
   public async find(questionRefId: number): Promise<Question> {
     // const params = {
-    //     TableName: QUESTION_TABLE_NAME,
-    //     Key: marshall({ id: questionRefId })
+    //   TableName: QUESTION_TABLE_NAME,
+    //   KeyConditionExpression: "QuestionRefId = :QuestionRefId",
+    //   ExpressionAttributeValues: {
+    //     ":QuestionRefId": { N: questionRefId },
+    //   },
+    //   ScanIndexForward: false,
+    //   Limit: 1,
     // };
-    // const { Item } = await ddbClient.send(new GetItemCommand(params));
-    // const params = {
-    //     KeyConditionExpression:
-    //         'userName = :userName and orderDate = :orderDate',
-    //     ExpressionAttributeValues: {
-    //         ':userName': { S: userName },
-    //         ':orderDate': { S: orderDate }
-    //     },
-    //     TableName: process.env.DYNAMODB_TABLE_NAME
-    // };
-
-    // const params = {
-    //     TableName: "CoffeeCrop",
-    //     KeyConditionExpression:
-    //       "OriginCountry = :originCountry AND RoastDate > :roastDate",
-    //     ExpressionAttributeValues: {
-    //       ":originCountry": "Ethiopia",
-    //       ":roastDate": "2023-05-01",
-    //     },
-    //     Limit: 1
-    //   };
-
-    // const { Items } = await ddbClient.send(new QueryCommand({
-    //     TableName: QUESTION_TABLE_NAME,
-    //     FilterExpression: 'QuestionRefId = :questionRefId',
-    //     ExpressionAttributeValues: {
-    //         ':questionRefId': { S: questionRefId.toString() }
-    //     },
-    //     Limit: 1
-    // }));
     const params = {
       TableName: QUESTION_TABLE_NAME,
       KeyConditionExpression: "QuestionRefId = :QuestionRefId",
-      ExpressionAttributeValues: {
-        ":QuestionRefId": { S: questionRefId.toString() },
-      },
+      ExpressionAttributeValues: marshall({ ":QuestionRefId": questionRefId }),
       ScanIndexForward: false,
       Limit: 1,
     };

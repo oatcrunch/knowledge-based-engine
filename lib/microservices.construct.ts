@@ -13,18 +13,18 @@ import {
   SEEDER_RETRIES_TIMEOUT,
 } from "../modules/knowledge-based-engine-service/src/helpers/generic/constants";
 
-export interface IMicroserviceProps {
+export interface IKbeMicroserviceProps {
   questionTbl: ITable;
   templateTbl: ITable;
   ruleTbl: ITable;
   knowledgeSessionTable: ITable;
 }
 
-export class KnowledgeMicroservicesConstruct extends Construct {
+export class KbeMicroservicesConstruct extends Construct {
   public readonly handleSeederFn: NodejsFunction;
   public readonly handleQuestionFn: NodejsFunction;
 
-  constructor(scope: Construct, id: string, props: IMicroserviceProps) {
+  constructor(scope: Construct, id: string, props: IKbeMicroserviceProps) {
     super(scope, id);
     this.handleSeederFn = this.createSeederFn(
       props.questionTbl,
@@ -57,11 +57,6 @@ export class KnowledgeMicroservicesConstruct extends Construct {
         minify: true,
         externalModules: ["aws-sdk"],
       },
-      // environment: {
-      //     PRIMARY_KEY: 'id',
-      //     SORT_KEY: 'QuestionRefId',
-      //     MAIL_TRAIL_TABLE_NAME: dbTable.tableName,
-      // },
     });
     questionTbl.grantWriteData(fn);
     templateTbl.grantWriteData(fn);
