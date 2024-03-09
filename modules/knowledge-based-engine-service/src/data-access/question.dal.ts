@@ -41,36 +41,31 @@ export class QuestionDAL {
     //     Limit: 1
     // }));
     const params = {
-        TableName: QUESTION_TABLE_NAME,
-        KeyConditionExpression:
-            'QuestionRefId = :QuestionRefId',
-        ExpressionAttributeValues: {
-            ':QuestionRefId': { S: questionRefId.toString() },
-        },
-        ScanIndexForward: false,
-        Limit: 1,
+      TableName: QUESTION_TABLE_NAME,
+      KeyConditionExpression: "QuestionRefId = :QuestionRefId",
+      ExpressionAttributeValues: {
+        ":QuestionRefId": { S: questionRefId.toString() },
+      },
+      ScanIndexForward: false,
+      Limit: 1,
     };
     const { Items } = await ddbClient.send(new QueryCommand(params));
     console.log("item", Items);
     const results = Items ? Items?.map((item) => unmarshall(item)) : [];
-    let question: Question = { refId: '', text: '', type: QuestionType.Undefined };
+    let question: Question = {
+      refId: "",
+      text: "",
+      type: QuestionType.Undefined,
+    };
     if (results.length > 0) {
-        question = {
-            refId: results[0].QuestionRefId,
-            text: results[0].Text,
-            type: results[0].Type,
-            options: results[0].Options,
-          };
+      question = {
+        refId: results[0].QuestionRefId,
+        text: results[0].Text,
+        type: results[0].Type,
+        options: results[0].Options,
+      };
     }
     console.log("results", results);
     return question;
-  }
-
-  public findBy(
-    currentQuestionId: number,
-    previousQuestionId: number,
-    answer: any
-  ): Question {
-    throw new Error("TODO");
   }
 }

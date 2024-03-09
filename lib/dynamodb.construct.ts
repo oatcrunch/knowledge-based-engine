@@ -3,12 +3,14 @@ import {
   AttributeType,
   BillingMode,
   ITable,
+  ProjectionType,
   Table,
 } from "aws-cdk-lib/aws-dynamodb";
 import { Construct } from "constructs";
 import {
   QUESTION_TABLE_NAME,
   RULE_TABLE_NAME,
+  KNOWLEDGE_SESSION_TABLE_NAME,
   TEMPLATE_TABLE_NAME,
 } from "../modules/knowledge-based-engine-service/src/helpers/generic/constants";
 
@@ -16,6 +18,7 @@ export class KnowledgeDbConstruct extends Construct {
   public readonly questionTable: ITable;
   public readonly templateTable: ITable;
   public readonly ruleTable: ITable;
+  public readonly knowledgeSessionTable: ITable;
 
   constructor(scope: Construct, id: string) {
     super(scope, id);
@@ -23,6 +26,7 @@ export class KnowledgeDbConstruct extends Construct {
     this.questionTable = this.createQuestionTable();
     this.templateTable = this.createTemplateTable();
     this.ruleTable = this.createRuleTable();
+    this.knowledgeSessionTable = this.createKnowledgeSessionTable();
     // const questionsJsonPath = '';
     // const initialData = JSON.parse(fs.readFileSync(questionsJsonPath, 'utf8'));
   }
@@ -69,20 +73,12 @@ export class KnowledgeDbConstruct extends Construct {
 
   private createRuleTable(): ITable {
     const table = new Table(this, RULE_TABLE_NAME!, {
-      // partitionKey: {
-      //   name: "Id",
-      //   type: AttributeType.NUMBER,
-      // },
-      // sortKey: {
-      //   name: "CurrentQuestionRefId",
-      //   type: AttributeType.NUMBER,
-      // },
       partitionKey: {
-        name: "SourceQuestionRefId",
+        name: "sourceQuestionRefId_currentQuestionRefId",
         type: AttributeType.STRING,
       },
       sortKey: {
-        name: "CurrentQuestionRefId",
+        name: "Id",
         type: AttributeType.STRING,
       },
       tableName: RULE_TABLE_NAME,
@@ -90,11 +86,42 @@ export class KnowledgeDbConstruct extends Construct {
       billingMode: BillingMode.PAY_PER_REQUEST,
     });
 
-    // table.addGlobalSecondaryIndex({
-    //   indexName: "SourceQuestionRefIdIndex",
-    //   partitionKey: { name: "SourceQuestionRefId", type: AttributeType.NUMBER },
-    //   sortKey: { name: "Id", type: AttributeType.NUMBER },
+    return table;
+
+    // const table = new Table(this, RULE_TABLE_NAME!, {
+    //   partitionKey: {
+    //     name: "CurrentQuestionRefId",
+    //     type: AttributeType.STRING,
+    //   },
+    //   sortKey: {
+    //     name: "Id",
+    //     type: AttributeType.STRING,
+    //   },
+    //   tableName: RULE_TABLE_NAME,
+    //   removalPolicy: RemovalPolicy.DESTROY,
+    //   billingMode: BillingMode.PAY_PER_REQUEST,
     // });
+
+    // table.addGlobalSecondaryIndex({
+    //   indexName: 'SourceQuestionRefIdIndex',
+    //   partitionKey: { name: 'SourceQuestionRefIdIndex', type: AttributeType.STRING },
+    //   // sortKey: { name: 'currentQuestionRefId', type: AttributeType.STRING },
+    //   projectionType: ProjectionType.ALL, // Adjust projection type based on your needs
+    // });
+
+    return table;
+  }
+
+  private createKnowledgeSessionTable(): ITable {
+    const table = new Table(this, KNOWLEDGE_SESSION_TABLE_NAME!, {
+      partitionKey: {
+        name: "SessionId",
+        type: AttributeType.STRING,
+      },
+      tableName: KNOWLEDGE_SESSION_TABLE_NAME,
+      removalPolicy: RemovalPolicy.DESTROY,
+      billingMode: BillingMode.PAY_PER_REQUEST,
+    });
 
     return table;
   }
