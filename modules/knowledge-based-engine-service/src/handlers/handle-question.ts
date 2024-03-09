@@ -18,7 +18,6 @@ export const main = async (
     if (event.httpMethod === "PUT") {
       let previousQuestionId = -1;
       let currentQuestionId = -1;
-      let sessionId = "";
       const qsParams = event.queryStringParameters;
 
       if (qsParams != null) {
@@ -66,7 +65,7 @@ export const main = async (
         previousQuestionId,
         response: responseAnswer,
       });
-      
+
       await knowledgeSessionDal.save({
         sessionId: currSessionId,
         response: sessionResponse?.response,
@@ -94,6 +93,10 @@ export const main = async (
         });
   
         console.log('exactRule', exactRule);
+
+        if (!exactRule) {
+          throw Error('Rule not found');
+        }
   
         const nextQuestionRefId = Number.parseInt(exactRule.nextQuestionRefId);
         console.log('nextQuestionRefId', nextQuestionRefId);

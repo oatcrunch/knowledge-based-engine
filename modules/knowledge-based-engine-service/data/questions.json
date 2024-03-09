@@ -1,7 +1,7 @@
 [
   {
     "Id": 1,
-    "QuestionRefId": "1000",
+    "QuestionRefId": 1000,
     "Text": "How many wheels?",
     "Type": "MCQ",
     "Options": {
@@ -12,7 +12,7 @@
   },
   {
     "Id": 2,
-    "QuestionRefId": "2000",
+    "QuestionRefId": 2000,
     "Text": "Is it used for offroad?",
     "Type": "MCQ",
     "Options": {
@@ -22,7 +22,7 @@
   },
   {
     "Id": 3,
-    "QuestionRefId": "3000",
+    "QuestionRefId": 3000,
     "Text": "Is it a high performance vehicle?",
     "Type": "MCQ",
     "Options": {
@@ -32,7 +32,7 @@
   },
   {
     "Id": 4,
-    "QuestionRefId": "4000",
+    "QuestionRefId": 4000,
     "Text": "Does it have a NA engine or turbo engine?",
     "Type": "MCQ",
     "Options": {
@@ -42,7 +42,7 @@
   },
   {
     "Id": 5,
-    "QuestionRefId": "5000",
+    "QuestionRefId": 5000,
     "Text": "Is the vehicle designed to focus on comfort ride?",
     "Type": "MCQ",
     "Options": {
@@ -52,21 +52,21 @@
   },
   {
     "Id": 6,
-    "QuestionRefId": "6000",
+    "QuestionRefId": 6000,
     "Text": "What is the color of the vehicle?",
     "Type": "FreeText",
     "Options": null
   },
   {
     "Id": 7,
-    "QuestionRefId": "7000",
+    "QuestionRefId": 7000,
     "Text": "How would you modify your vehicle?",
     "Type": "FreeText",
     "Options": null
   },
   {
     "Id": 8,
-    "QuestionRefId": "8000",
+    "QuestionRefId": 8000,
     "Text": "Which type of vehicle(s) do you own?",
     "Type": "MCMA",
     "Options": {
