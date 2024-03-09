@@ -2,6 +2,7 @@
 export const QUESTION_TABLE_NAME = 'Question'
 export const TEMPLATE_TABLE_NAME = 'Template'
 export const RULE_TABLE_NAME = 'Rule'
+export const KNOWLEDGE_SESSION_TABLE_NAME = 'KnowledgeSession'
 
 // Microservices related
 export const SEEDER_FN = 'QuestionSeederFn';

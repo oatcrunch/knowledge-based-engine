@@ -14,7 +14,8 @@ export class KnowledgeBasedEngineStack extends cdk.Stack {
     const microservices = new KnowledgeMicroservicesConstruct(this, 'Microservices', {
       questionTbl: database.questionTable,
       templateTbl: database.templateTable,
-      ruleTbl: database.ruleTable
+      ruleTbl: database.ruleTable,
+      knowledgeSessionTable: database.knowledgeSessionTable
     });
 
     const apiGateway = new KnowledgeApiGatewayConstruct(this, 'ApiGateway', {

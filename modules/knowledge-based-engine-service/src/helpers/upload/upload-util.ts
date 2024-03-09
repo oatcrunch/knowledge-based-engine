@@ -71,7 +71,12 @@ export const uploadRuleData = async () => {
             for (const d of data) {
                 const params = {
                     TableName: RULE_TABLE_NAME,
-                    Item: marshall(d || {}),
+                    Item: marshall({
+                        Id: d.Id,
+                        Rule: d.Rule,
+                        NextQuestionRefId: d.NextQuestionRefId,
+                        sourceQuestionRefId_currentQuestionRefId: `${d.SourceQuestionRefId}_${d.CurrentQuestionRefId}`
+                    } || {}),
                 };
                 const createResult = await ddbClient.send(new PutItemCommand(params));
                 console.log(
