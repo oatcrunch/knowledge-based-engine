@@ -1,13 +1,13 @@
+import { APIGatewayEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
 import {
-    APIGatewayEvent,
-    Context,
-    APIGatewayProxyResult,
-} from 'aws-lambda';
-import { uploadQuestionsData, uploadRuleData, uploadTemplateData } from '../helpers/upload/upload-util';
+    uploadQuestionsData,
+    uploadRuleData,
+    uploadTemplateData,
+} from '../helpers/upload/upload-util';
 
 export const main = async (
     event: APIGatewayEvent,
-    context: Context
+    context: Context,
 ): Promise<APIGatewayProxyResult> => {
     console.log('event 👉', event);
     try {
@@ -19,16 +19,16 @@ export const main = async (
 
         console.log('Uploading rule data');
         await uploadRuleData();
-        
+
         return {
             statusCode: 200,
             body: JSON.stringify({
-                message: 'Successfully seeded questions data'
-            })
-        }
+                message: 'Successfully seeded questions data',
+            }),
+        };
     } catch (err: any) {
         console.error(
-            `Exception thrown at function handle-email-success.main: ${err}`
+            `Exception thrown at function handle-email-success.main: ${err}`,
         );
         return {
             statusCode: 500,
