@@ -1,4 +1,4 @@
 export class KnowledgeSessionResponse {
     sessionId: string;
-    response: any[]
+    response: any[];
 }

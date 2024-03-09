@@ -19,7 +19,7 @@ export class KbeApiGatewayConstruct extends Construct {
         const apiGateway = new LambdaRestApi(this, 'seederApi', {
             restApiName: 'seederService',
             handler: seederMicroservice,
-            proxy: false
+            proxy: false,
         });
 
         const seeder = apiGateway.root.addResource('seeder');
@@ -30,11 +30,11 @@ export class KbeApiGatewayConstruct extends Construct {
         const apiGateway = new LambdaRestApi(this, 'questionApi', {
             restApiName: 'questionService',
             handler: questionMicroservice,
-            proxy: false
+            proxy: false,
         });
 
         const question = apiGateway.root.addResource('question');
         const nextQuestion = question.addResource('next');
         nextQuestion.addMethod('PUT');
-    }   
+    }
 }

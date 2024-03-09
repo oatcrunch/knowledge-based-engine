@@ -3,4 +3,5 @@ export class Rule {
     currentQuestionRefId: string;
     nextQuestionRefId: string;
     rule: any;
+    sessionEnded: boolean;
 }

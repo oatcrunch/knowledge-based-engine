@@ -1,23 +1,26 @@
-import { PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
-import { KnowledgeSessionResponse } from "../dto/knowledge-session.dto";
-import { KNOWLEDGE_SESSION_TABLE_NAME } from "../helpers/generic/constants";
-import { ddbClient } from "./db-client";
-import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
+import { PutItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb';
+import { KnowledgeSessionResponse } from '../dto/knowledge-session.dto';
+import { KNOWLEDGE_SESSION_TABLE_NAME } from '../helpers/generic/constants';
+import { ddbClient } from './db-client';
+import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
 
 export class KnowledgeSessionDAL {
     public async save(data: KnowledgeSessionResponse): Promise<boolean> {
-        console.log('ddd', data);
         try {
             const params = {
                 TableName: KNOWLEDGE_SESSION_TABLE_NAME,
-                Item: marshall({
-                    SessionId: data.sessionId,
-                    Response: data.response
-                } || {}),
+                Item: marshall(
+                    {
+                        SessionId: data.sessionId,
+                        Response: data.response,
+                    } || {},
+                ),
             };
-            const createResult = await ddbClient.send(new PutItemCommand(params));
+            const createResult = await ddbClient.send(
+                new PutItemCommand(params),
+            );
             console.log(
-                `persistData - createResult: "${JSON.stringify(createResult)}"`
+                `persistData - createResult: "${JSON.stringify(createResult)}"`,
             );
             return true;
         } catch (err) {
@@ -29,8 +32,7 @@ export class KnowledgeSessionDAL {
     public async find(sessionId: string): Promise<KnowledgeSessionResponse> {
         const params = {
             TableName: KNOWLEDGE_SESSION_TABLE_NAME,
-            KeyConditionExpression:
-                'SessionId = :SessionId',
+            KeyConditionExpression: 'SessionId = :SessionId',
             ExpressionAttributeValues: {
                 ':SessionId': { S: sessionId },
             },
@@ -38,15 +40,14 @@ export class KnowledgeSessionDAL {
             Limit: 1,
         };
         const { Items } = await ddbClient.send(new QueryCommand(params));
-        console.log("item", Items);
         const results = Items ? Items?.map((item) => unmarshall(item)) : [];
-        let sesionResponse: KnowledgeSessionResponse = { sessionId, response: [] };
-        console.log('Rrr', results);
+        let sesionResponse: KnowledgeSessionResponse = {
+            sessionId,
+            response: [],
+        };
         if (results.length > 0) {
-            console.log('results[0]', results[0]);
             sesionResponse.response = results[0].Response;
         }
-        console.log("sesionResponse", sesionResponse);
         return sesionResponse;
     }
 }

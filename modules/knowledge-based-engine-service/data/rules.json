@@ -1,62 +1,134 @@
 [
   {
-    "Id": "1",
-    "SourceQuestionRefId": "0",
-    "CurrentQuestionRefId": "1000",
+    "Id": 1,
+    "SourceQuestionRefId": 0,
+    "CurrentQuestionRefId": 1000,
     "Rule": {
-      "isMultipleAnswer": false,
+      "kind": "MCQ",
       "eq": 1
     },
-    "NextQuestionRefId": 2000
+    "NextQuestionRefId": 2000,
+    "EndOfQuestion": false
   },
   {
-    "Id": "2",
-    "SourceQuestionRefId": "0",
-    "CurrentQuestionRefId": "1000",
+    "Id": 2,
+    "SourceQuestionRefId": 0,
+    "CurrentQuestionRefId": 1000,
     "Rule": {
-      "isMultipleAnswer": false,
+      "kind": "MCQ",
       "eq": 2
     },
-    "NextQuestionRefId": 3000
+    "NextQuestionRefId": 3000,
+    "EndOfQuestion": false
   },
   {
-    "Id": "3",
-    "SourceQuestionRefId": "0",
-    "CurrentQuestionRefId": "1000",
+    "Id": 3,
+    "SourceQuestionRefId": 0,
+    "CurrentQuestionRefId": 1000,
     "Rule": {
-      "isMultipleAnswer": false,
+      "kind": "MCQ",
       "eq": 3
     },
-    "NextQuestionRefId": 4000
+    "NextQuestionRefId": 4000,
+    "EndOfQuestion": false
   },
   {
-    "Id": "4",
-    "SourceQuestionRefId": "1000",
-    "CurrentQuestionRefId": "2000",
+    "Id": 4,
+    "SourceQuestionRefId": 1000,
+    "CurrentQuestionRefId": 2000,
     "Rule": {
-      "isMultipleAnswer": false,
+      "kind": "MCQ",
       "eq": 2
     },
-    "NextQuestionRefId": 3000
+    "NextQuestionRefId": 3000,
+    "EndOfQuestion": false
   },
   {
-    "Id": "5",
-    "SourceQuestionRefId": "1000",
-    "CurrentQuestionRefId": "3000",
+    "Id": 5,
+    "SourceQuestionRefId": 1000,
+    "CurrentQuestionRefId": 3000,
     "Rule": {
-      "isMultipleAnswer": false,
+      "kind": "MCQ",
       "eq": 1
     },
-    "NextQuestionRefId": 4000
+    "NextQuestionRefId": 4000,
+    "EndOfQuestion": false
   },
   {
-    "Id": "6",
-    "SourceQuestionRefId": "1000",
-    "CurrentQuestionRefId": "3000",
+    "Id": 6,
+    "SourceQuestionRefId": 1000,
+    "CurrentQuestionRefId": 3000,
     "Rule": {
-      "isMultipleAnswer": false,
+      "kind": "MCQ",
       "eq": 2
     },
-    "NextQuestionRefId": 5000
+    "NextQuestionRefId": 5000,
+    "EndOfQuestion": false
+  },
+  {
+    "Id": 7,
+    "SourceQuestionRefId": 2000,
+    "CurrentQuestionRefId": 3000,
+    "Rule": {
+      "kind": "MCQ",
+      "eq": 1
+    },
+    "NextQuestionRefId": null,
+    "EndOfQuestion": true
+  },
+  {
+    "Id": 8,
+    "SourceQuestionRefId": 2000,
+    "CurrentQuestionRefId": 3000,
+    "Rule": {
+      "kind": "MCQ",
+      "eq": 2
+    },
+    "NextQuestionRefId": null,
+    "EndOfQuestion": true
+  },
+  {
+    "Id": 9,
+    "SourceQuestionRefId": 3000,
+    "CurrentQuestionRefId": 4000,
+    "Rule": {
+      "kind": "MCQ",
+      "eq": 1
+    },
+    "NextQuestionRefId": null,
+    "EndOfQuestion": true
+  },
+  {
+    "Id": 10,
+    "SourceQuestionRefId": 3000,
+    "CurrentQuestionRefId": 4000,
+    "Rule": {
+      "kind": "MCQ",
+      "eq": 2
+    },
+    "NextQuestionRefId": null,
+    "EndOfQuestion": true
+  },
+  {
+    "Id": 11,
+    "SourceQuestionRefId": 3000,
+    "CurrentQuestionRefId": 5000,
+    "Rule": {
+      "kind": "MCQ",
+      "eq": 1
+    },
+    "NextQuestionRefId": null,
+    "EndOfQuestion": true
+  },
+  {
+    "Id": 12,
+    "SourceQuestionRefId": 3000,
+    "CurrentQuestionRefId": 5000,
+    "Rule": {
+      "kind": "MCQ",
+      "eq": 2
+    },
+    "NextQuestionRefId": null,
+    "EndOfQuestion": true
   }
 ]
