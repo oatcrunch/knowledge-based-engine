@@ -19,4 +19,20 @@ What this design/solution considers:
 
 ## Pre-requisites
 
-TODO
+WIP
+
+### Tools to be installed on your machine:
+
+-   **[NodeJS](https://nodejs.org/en)** (version `20.0.0` preferred)
+-   **[Docker & Kubernetes](https://www.docker.com/products/docker-desktop/)**
+-   **[AWS CLI](https://aws.amazon.com/cli/)** (version > `2.9` preferred)
+-   **[AWS CDK](https://aws.amazon.com/cdk/)** (optional)
+-   Windows OS (preferred) or Linux (Ubuntu)
+
+## Pre-run: Cloning Project and Installing Dependencies
+
+WIP
+
+## Running the application
+
+WIP
