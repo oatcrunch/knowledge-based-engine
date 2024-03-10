@@ -1,13 +1,13 @@
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
-import { QuestionDAL } from '../data-access/question.dal';
+import { QuestionDal } from '../data-access/question.dal';
 import { v4 as uuidv4 } from 'uuid';
-import { KnowledgeSessionDAL } from '../data-access/knowledge-session.dal';
-import { RuleDAL } from '../data-access/rule.dal';
-import { Question } from '../dto/question.dto';
+import { KnowledgeSessionDal } from '../data-access/knowledge-session.dal';
+import { RuleDal } from '../data-access/rule.dal';
+import { Question } from '../models/question';
 
-const questionDal = new QuestionDAL();
-const knowledgeSessionDal = new KnowledgeSessionDAL();
-const ruleDal = new RuleDAL();
+const questionDal = new QuestionDal();
+const knowledgeSessionDal = new KnowledgeSessionDal();
+const ruleDal = new RuleDal();
 
 export const main = async (
     event: APIGatewayEvent,
@@ -65,10 +65,18 @@ export const main = async (
                 throw new Error('Session not found');
             }
 
+            // Get the type of question from current question
+            const currQuestion = await questionDal.find(currentQuestionId);
+            if (!currQuestion || !currQuestion.refId) {
+                throw new Error('Current question Id is invalid');
+            }
+            const type = currQuestion.type;
+
             // Update response trail based on the knowledge context of a given session
             sessionResponse.response.push({
                 currentQuestionId,
                 previousQuestionId,
+                type,
                 response: responseAnswer,
             });
 
@@ -83,7 +91,6 @@ export const main = async (
                 currentQuestionId,
                 previousQuestionId,
             );
-            console.log('Rules', rules);
 
             let nextQuestion: Question | {} = {};
             let questionHasEnded = false;
@@ -105,17 +112,9 @@ export const main = async (
                     return true;
                 });
 
-                console.log('exactRule', exactRule);
-
                 if (!exactRule) {
                     throw Error('Rule not found');
                 }
-
-                // const nextQuestionRefId = exactRule.nextQuestionRefId
-                //     ? Number.parseInt(exactRule.nextQuestionRefId)
-                //     : null;
-                // questionHasEnded = exactRule.sessionEnded;
-                // console.log('nextQuestionRefId', nextQuestionRefId);
 
                 // Query for the next question
                 questionHasEnded = exactRule.sessionEnded;

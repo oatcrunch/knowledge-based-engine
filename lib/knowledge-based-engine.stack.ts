@@ -25,6 +25,7 @@ export class KnowledgeBasedEngineStack extends cdk.Stack {
         const apiGateway = new KbeApiGatewayConstruct(this, 'ApiGateway', {
             seederMicroservice: microservices.handleSeederFn,
             questionMicroservice: microservices.handleQuestionFn,
+            templateMicroservice: microservices.handleTemplateFn,
         });
     }
 }
