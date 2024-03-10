@@ -1,14 +1,22 @@
-# Welcome to your CDK TypeScript project
+# Welcome to Knowledge Based Engine
 
-This is a blank project for CDK development with TypeScript.
+This is a simple POC project to demonstrate highly available and highly extensible question-answer mechanism which then returns the user the fully matched result (known as template) based on the answer responses. It eliminates the need for code to incorporate questioning logic a.k.a rules (determining what is the next question based on certain response, complex if-else to return matching result etc). The segregation separates the question, rules and templates from the code which eliminates the need for re-deployment for every change related to question, rule or even template.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Issues and Considerations
 
-## Useful commands
+What this design/solution considers:
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+-   High availability (serverless architecture)
+-   Extensibility (easily extend from the existing question, rule and template sets)
+-   Auto-scalability
+-   Resiliency
+-   Cost
+-   High performance (leverage on indexed hash columns on database for quicker querying)
+-   Features:
+    -   API to seed initial data (questions, rules, and templates)
+    -   API to query for the next question based on answer response
+    -   API to return the matching result based on answer responses
+
+## Pre-requisites
+
+TODO

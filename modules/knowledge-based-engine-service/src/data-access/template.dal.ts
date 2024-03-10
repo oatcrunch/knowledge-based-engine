@@ -1,8 +1,8 @@
-import { TEMPLATE_TABLE_NAME } from "../helpers/generic/constants";
-import { QueryCommand } from "@aws-sdk/client-dynamodb";
-import { ddbClient } from "./db-client";
-import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { Template } from "../models/template";
+import { TEMPLATE_TABLE_NAME } from '../helpers/generic/constants';
+import { QueryCommand } from '@aws-sdk/client-dynamodb';
+import { ddbClient } from './db-client';
+import { unmarshall } from '@aws-sdk/util-dynamodb';
+import { Template } from '../models/template';
 
 export class TemplateDal {
     public async find(hash: string): Promise<Template> {
@@ -21,7 +21,7 @@ export class TemplateDal {
         let template: Template = {
             title: '',
             description: '',
-            refId: ''
+            refId: '',
         };
         if (results.length > 0) {
             template.refId = results[0].RefId;
