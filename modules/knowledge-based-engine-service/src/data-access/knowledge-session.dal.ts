@@ -1,10 +1,10 @@
 import { PutItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb';
-import { KnowledgeSessionResponse } from '../dto/knowledge-session.dto';
+import { KnowledgeSessionResponse } from '../models/knowledge-session';
 import { KNOWLEDGE_SESSION_TABLE_NAME } from '../helpers/generic/constants';
 import { ddbClient } from './db-client';
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
 
-export class KnowledgeSessionDAL {
+export class KnowledgeSessionDal {
     public async save(data: KnowledgeSessionResponse): Promise<boolean> {
         try {
             const params = {

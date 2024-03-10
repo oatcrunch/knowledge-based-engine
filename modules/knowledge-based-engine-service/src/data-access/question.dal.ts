@@ -1,10 +1,10 @@
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
-import { Question, QuestionType } from '../dto/question.dto';
+import { Question, QuestionType } from '../models/question';
 import { QUESTION_TABLE_NAME } from '../helpers/generic/constants';
 import { ddbClient } from './db-client';
-import { GetItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb';
+import { QueryCommand } from '@aws-sdk/client-dynamodb';
 
-export class QuestionDAL {
+export class QuestionDal {
     public async find(questionRefId: number): Promise<Question> {
         // const params = {
         //   TableName: QUESTION_TABLE_NAME,

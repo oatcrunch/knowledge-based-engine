@@ -1,10 +1,10 @@
 import { QueryCommand } from '@aws-sdk/client-dynamodb';
-import { Rule } from '../dto/rule.dto';
+import { Rule } from '../models/rule';
 import { RULE_TABLE_NAME } from '../helpers/generic/constants';
 import { ddbClient } from './db-client';
 import { unmarshall } from '@aws-sdk/util-dynamodb';
 
-export class RuleDAL {
+export class RuleDal {
     public async findAllBy(
         currentQuestionId: number,
         previousQuestionId: number,

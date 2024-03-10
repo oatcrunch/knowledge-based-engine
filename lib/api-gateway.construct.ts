@@ -5,6 +5,7 @@ import { Construct } from 'constructs';
 interface IKbeApiGatewayProps {
     seederMicroservice: IFunction;
     questionMicroservice: IFunction;
+    templateMicroservice: IFunction;
 }
 
 export class KbeApiGatewayConstruct extends Construct {
@@ -13,6 +14,7 @@ export class KbeApiGatewayConstruct extends Construct {
 
         this.createSeederApi(props.seederMicroservice);
         this.createQuestionApi(props.questionMicroservice);
+        this.createTemplateApi(props.templateMicroservice);
     }
 
     private createSeederApi(seederMicroservice: IFunction) {
@@ -36,5 +38,16 @@ export class KbeApiGatewayConstruct extends Construct {
         const question = apiGateway.root.addResource('question');
         const nextQuestion = question.addResource('next');
         nextQuestion.addMethod('PUT');
+    }
+
+    private createTemplateApi(templateMicroservice: IFunction) {
+        const apiGateway = new LambdaRestApi(this, 'templateApi', {
+            restApiName: 'templateService',
+            handler: templateMicroservice,
+            proxy: false,
+        });
+
+        const template = apiGateway.root.addResource('template');
+        template.addMethod('POST');
     }
 }
